@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CritterBrainAlpha\CritterBrainAlpha.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Defender\Defender.cs" />
     <Compile Include="CritterCreator.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,13 +11,9 @@ namespace CatCritter
     {
         public IEnumerable<CritterBrain> GetCritterBrains()
         {
-            var creator = "Cat Flynn 100458008";
-
-            var critters = new[] {
-                new CritterBrainAlpha("alpha", creator)
+            return new[] {
+                new Defender()
             };
-
-            return critters;
         }
     }
 }
