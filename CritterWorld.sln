@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCritter", "DemoCritter\DemoCritter.csproj", "{6670A259-8EE4-462F-8321-5827AA328536}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CritterWorldControlPanel", "CritterWorldControlPanel\CritterWorldControlPanel.csproj", "{A90B9F06-7073-4796-886C-115C667A5D22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CritterBrains", "CritterBrains\CritterBrains.csproj", "{C9BC9344-AAD7-4EC2-850D-F82C557F7190}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatCritter", "CatCritter\CatCritter.csproj", "{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,22 @@ Global
 		{C9BC9344-AAD7-4EC2-850D-F82C557F7190}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C9BC9344-AAD7-4EC2-850D-F82C557F7190}.Release|Win32.ActiveCfg = Release|Any CPU
 		{C9BC9344-AAD7-4EC2-850D-F82C557F7190}.Release|x86.ActiveCfg = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|Win32.Build.0 = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Debug|x86.Build.0 = Debug|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|Win32.ActiveCfg = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|Win32.Build.0 = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|x86.ActiveCfg = Release|Any CPU
+		{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
