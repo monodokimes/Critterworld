@@ -9,6 +9,11 @@ using System.Threading;
 
 namespace CatCritter
 {
+    /// <summary>
+    /// The Defender critter moves slowly and sits around waiting for fights. If
+    /// another critter is seen nearby, Defender will sit still and wait for them
+    /// to go away; if they don't, it fights.
+    /// </summary>
     public class Defender : CritterBrain
     {
         private const string CritterName = "Defender";
@@ -20,8 +25,7 @@ namespace CatCritter
         private int _waitSeconds = 5;
         private int _findTargetSeconds = 5;
         #endregion
-
-        private List<IWorldObject> _food;
+        
         private IWorldObject _targetFood;
 
         public Defender() : this(null)
@@ -30,7 +34,6 @@ namespace CatCritter
 
         public Defender(Image[] images) : base(CritterName, Constants.Creator, images)
         {
-            _food = new List<IWorldObject>();
         }
 
         public override void Birth()
@@ -38,41 +41,25 @@ namespace CatCritter
             this.SetRandomDirection();
             this.Sprint(_sprintSeconds, _sprintSpeed);
 
-            this.DoRepeating(_findTargetSeconds, () => _targetFood == null, SetTargetDirection);
+            this.DoRepeating(_findTargetSeconds, SetNewTarget);
         }
 
         public override void Think()
         {
-            var nearbyObjects = Critter.Scan();
-            var food = nearbyObjects.Where(o => o.Type == "Food");
-            var critters = nearbyObjects.Where(o => o.Type == "Critter");
-
-            if (food.Any())
+            // Constantly look for new food and start moving towards it if found
+            var newFood = this.GetClosest(Constants.Food);
+            if (newFood != null)
             {
-                foreach (var foodObject in food)
+                if (_targetFood == null || this.DistanceTo(newFood) < this.DistanceTo(_targetFood))
                 {
-                    if (_food.Any(f => f.X == foodObject.X && f.Y == foodObject.Y))
-                        continue;
-
-                    _food.Add(foodObject);
+                    _targetFood = newFood;
+                    SetNewTarget();
                 }
             }
-
-            if (!critters.Any() && _targetFood == null)
+            
+            if (!this.IsMoving())
             {
-                // It's possible some food was consumed so refresh the list before
-                // trying to set a target
-                _food = _food
-                    .Where(f => f != null)
-                    .ToList();
-
-                if (_food.Any())
-                {
-                    _targetFood = this.GetClosest(_food);
-                }
-
-                this.SetSpeed(_normalSpeed);
-                SetTargetDirection();
+                SetNewTarget();
             }
         }
 
@@ -82,16 +69,15 @@ namespace CatCritter
             {
                 // target food is on the other side of a wall :(
                 // Guess we'll just forget about it :(
-                _food.Remove(_targetFood);
                 _targetFood = null;
             }
 
-            this.SetRandomDirection();
+            SetNewTarget();
         }
 
         public override void NotifyCloseToCritter(OtherCritter other)
         {
-            if (new[] { Strength.MuchWeaker, Strength.Weaker }.Contains(other.Strength))
+            if (this.IsStrongerThan(other))
             {
                 // They might come and attack us, so sit and wait.
                 this.SetSpeed(0);
@@ -107,14 +93,22 @@ namespace CatCritter
 
         public override void NotifyBumpedCritter(OtherCritter other)
         {
-            if (new[] { Strength.MuchWeaker, Strength.Weaker }.Contains(other.Strength))
+            if (this.IsStrongerThan(other))
             {
                 other.Attack();
             }
         }
-
-        private void SetTargetDirection()
+        
+        private void SetNewTarget()
         {
+            var critters = this.GetNearbyObjects(Constants.Critter);
+
+            // Don't move if anyone's nearby!
+            if (critters.Any())
+                return;
+
+            _targetFood = this.GetClosest(Constants.Food);
+
             if (_targetFood != null)
             {
                 this.SetTarget(_targetFood.X, _targetFood.Y);
@@ -123,6 +117,8 @@ namespace CatCritter
             {
                 this.SetRandomDirection();
             }
+
+            this.SetSpeed(_normalSpeed);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace CatCritter
             var maxSpeed = 10;
 
             if (speed <= 0)
-            { 
+            {
                 critter.Stop();
                 return;
             }
@@ -53,7 +53,7 @@ namespace CatCritter
             {
                 speed = maxSpeed;
             }
-            
+
             critter.Speed = speed;
         }
 
@@ -71,8 +71,40 @@ namespace CatCritter
 
         public static int GetOppositeDirection(this CritterBrain critterBrain, int direction)
         {
-            return direction >= 180 ? direction - 180 :direction + 180;
+            return direction >= 180 ? direction - 180 : direction + 180;
         }
+
+        /// <summary>
+        /// Get a new direction from the given direction rotated by turnAngle.
+        /// </summary>
+        /// <param name="critterBrain"></param>
+        /// <param name="direction">the original direction to be rotated</param>
+        /// <param name="turnAngle">between -180 and 180 degrees</param>
+        /// <returns></returns>
+        public static int GetNewDirection(this CritterBrain critterBrain, int direction, int turnAngle)
+        {
+            if (turnAngle > 180 || turnAngle < -180)
+                throw new ArgumentException();
+
+            direction += turnAngle;
+
+            if (direction < 0)
+            {
+                direction += 360;
+            }
+            else if (direction > 360)
+            {
+                direction -= 360;
+            }
+
+            return direction;
+        }
+
+        public static void Turn(this CritterBrain critterBrain, int turnAngle) =>
+            critterBrain.Critter.Direction = GetNewDirection(
+                critterBrain,
+                critterBrain.Critter.Direction,
+                turnAngle);
 
         public static void DoAfterDelay(this CritterBrain critterBrain, int waitSeconds, Action actionAfter)
         {
@@ -85,7 +117,7 @@ namespace CatCritter
                 .Start();
         }
 
-        public static void DoRepeating(this CritterBrain critterBrain, int repeatSeconds, Func<bool> predicate, Action action)
+        public static void DoRepeating(this CritterBrain critterBrain, int repeatSeconds, Action action)
         {
             new Thread(
                 new ThreadStart(() =>
@@ -93,14 +125,9 @@ namespace CatCritter
                     // Forever! :D
                     while (true)
                     {
-                        if (predicate())
-                        {
-                            action();
-                        }
-
+                        action.Invoke();
                         Thread.Sleep(repeatSeconds * 1000);
                     }
-
                 }));
         }
 
@@ -116,19 +143,26 @@ namespace CatCritter
             critterBrain.DoAfterDelay(sprintSeconds, () => critterBrain.SetSpeed(initialSpeed));
         }
 
-        public static bool IsSprinting(this CritterBrain critterBrain, int sprintSpeed)
-        {
-            return critterBrain.Critter.Speed == sprintSpeed;
-        }
+        public static bool IsMoving(this CritterBrain critterBrain) => critterBrain.Critter.Speed != 0;
 
-        public static IWorldObject GetClosest(this CritterBrain critterBrain, IEnumerable<IWorldObject> objects)
-        {
-            if (!objects.Any())
-                return null;
+        public static bool IsSprinting(this CritterBrain critterBrain, int sprintSpeed) => critterBrain.Critter.Speed == sprintSpeed;
 
-            return objects
-                .OrderBy(o => critterBrain.DistanceTo(o))
-                .First();
-        }
+        public static IWorldObject GetClosest(this CritterBrain critterBrain, IEnumerable<IWorldObject> objects) =>
+            objects.OrderBy(critterBrain.DistanceTo)
+                .FirstOrDefault();
+
+        public static IWorldObject GetClosest(this CritterBrain critterBrain, string type) =>
+            GetClosest(critterBrain, GetNearbyObjects(critterBrain, type));
+
+        public static IEnumerable<IWorldObject> GetNearbyObjects(this CritterBrain critterBrain, string type) =>
+            critterBrain.Critter
+                .Scan()
+                .Where(o => o.Type == type);
+
+        public static bool IsStrongerThan(this CritterBrain critterBrain, OtherCritter other) =>
+            new[] {
+                Strength.MuchWeaker,
+                Strength.Weaker
+            }.Contains(other.Strength);
     }
 }
