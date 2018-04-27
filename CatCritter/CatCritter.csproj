@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,13 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Defender\Defender.cs" />
     <Compile Include="CritterCreator.cs" />
+    <Compile Include="Defender\DefenderConfiguration.cs" />
+    <Compile Include="Defender\DefenderConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Defender\DefenderConfigurationForm.Designer.cs">
+      <DependentUpon>DefenderConfigurationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,6 +60,11 @@
       <Project>{c9bc9344-aad7-4ec2-850d-f82c557f7190}</Project>
       <Name>CritterBrains</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Defender\DefenderConfigurationForm.resx">
+      <DependentUpon>DefenderConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

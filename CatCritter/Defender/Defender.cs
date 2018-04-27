@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace CatCritter
 {
@@ -18,15 +19,8 @@ namespace CatCritter
     {
         private const string CritterName = "Defender";
 
-        #region Configuration
-        private int _sprintSpeed = 10;
-        private int _normalSpeed = 1;
-        private int _sprintSeconds = 4;
-        private int _waitSeconds = 5;
-        private int _findTargetSeconds = 5;
-        #endregion
-        
         private IWorldObject _targetFood;
+        public DefenderConfiguration Config { get; private set; }
 
         public Defender() : this(null)
         {
@@ -34,14 +28,40 @@ namespace CatCritter
 
         public Defender(Image[] images) : base(CritterName, Constants.Creator, images)
         {
+            LoadConfiguration();
         }
 
+        public override Form Form => new DefenderConfigurationForm(this);
+
+        private void LoadConfiguration()
+        {
+            Config = new DefenderConfiguration();
+
+            if (!this.ConfigAvailable())
+            {
+                Console.WriteLine("No configuration available; loading default values");
+                return;
+            }
+
+            Config.SprintSpeed = this.GetConfigValueInt("sprintSpeed");
+            Config.NormalSpeed = this.GetConfigValueInt("normalSpeed");
+            Config.SprintSeconds = this.GetConfigValueInt("sprintSeconds");
+            Config.WaitSeconds = this.GetConfigValueInt("waitSeconds");
+            Config.FindTargetSeconds = this.GetConfigValueInt("findTargetSeconds");
+        }
+
+        public void SaveConfiguration()
+        {
+            this.SaveConfigurationLines(Config.Lines);
+            LoadConfiguration();
+        }
+        
         public override void Birth()
         {
             this.SetRandomDirection();
-            this.Sprint(_sprintSeconds, _sprintSpeed);
+            this.Sprint(Config.SprintSeconds, Config.SprintSpeed);
 
-            this.DoRepeating(_findTargetSeconds, SetNewTarget);
+            this.DoRepeating(Config.FindTargetSeconds, SetNewTarget);
         }
 
         public override void Think()
@@ -81,13 +101,13 @@ namespace CatCritter
             {
                 // They might come and attack us, so sit and wait.
                 this.SetSpeed(0);
-                this.DoAfterDelay(_waitSeconds, () => this.SetSpeed(_normalSpeed));
+                this.DoAfterDelay(Config.WaitSeconds, () => this.SetSpeed(Config.NormalSpeed));
             }
             else
             {
                 // 50% or less chance of us winning the fight, let's run away!
                 var awayDirection = this.GetOppositeDirection(other.DirectionTo);
-                this.Sprint(_sprintSpeed, _sprintSeconds);
+                this.Sprint(Config.SprintSpeed, Config.SprintSeconds);
             }
         }
 
@@ -118,7 +138,7 @@ namespace CatCritter
                 this.SetRandomDirection();
             }
 
-            this.SetSpeed(_normalSpeed);
+            this.SetSpeed(Config.NormalSpeed);
         }
     }
 }
