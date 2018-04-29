@@ -11,8 +11,9 @@ namespace CatCritter
     {
         public IEnumerable<CritterBrain> GetCritterBrains()
         {
-            return new[] {
-                new Defender()
+            return new CritterBrain[] {
+                new Defender(),
+                new Zoolander()
             };
         }
     }

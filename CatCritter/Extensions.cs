@@ -256,6 +256,9 @@ namespace CatCritter
                 }
             }
         }
+
+        public static string AsConfigLine(this int value, string key) =>
+            string.Format("{0}={1}", key, value);
         #endregion
     }
 }
