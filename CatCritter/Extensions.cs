@@ -13,12 +13,7 @@ namespace CatCritter
     public static class Extensions
     {
         private static Random _random = new Random();
-
-        public static void SetTarget(this CritterBrain critterBrain, IWorldObject target)
-        {
-            critterBrain.SetTarget(target.X, target.Y);
-        }
-
+        
         public static void SetTarget(this CritterBrain critterBrain, int x, int y)
         {
             var direction = critterBrain.Critter.GetDirectionTo(x, y);
@@ -130,7 +125,8 @@ namespace CatCritter
                         action.Invoke();
                         Thread.Sleep(repeatSeconds * 1000);
                     }
-                }));
+                }))
+                .Start();
         }
 
         public static bool IsMoving(this CritterBrain critterBrain) => critterBrain.Critter.Speed != 0;
@@ -239,13 +235,13 @@ namespace CatCritter
                 })
                 .FirstOrDefault(kvp => kvp.Key == key)?.Value;
 
-        public static void SaveConfigurationLines(this CritterBrain critterBrain, IEnumerable<string> lines)
+        public static void SaveConfig(this CritterBrain critterBrain, IConfiguration config)
         {
             using (var writer = new StreamWriter(GetConfigName(critterBrain)))
             {
                 try
                 {
-                    foreach (var line in lines)
+                    foreach (var line in config.Lines)
                     {
                         writer.WriteLine(line);
                     }

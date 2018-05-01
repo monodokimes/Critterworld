@@ -46,7 +46,7 @@ namespace CatCritter
 
         public void SaveConfiguration()
         {
-            this.SaveConfigurationLines(Config.Lines);
+            this.SaveConfig(Config);
             LoadConfiguration();
         }
 

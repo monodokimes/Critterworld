@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CatCritter
 { 
-    public class ZoolanderConfiguration
+    public class ZoolanderConfiguration : IConfiguration
     {
         /// <summary>
         /// Angle to turn by

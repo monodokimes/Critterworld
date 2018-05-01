@@ -13,7 +13,8 @@ namespace CatCritter
         {
             return new CritterBrain[] {
                 new Defender(),
-                new Zoolander()
+                new Zoolander(),
+                new GoodBoi()
             };
         }
     }

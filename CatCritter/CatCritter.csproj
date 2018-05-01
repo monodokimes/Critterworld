@@ -53,6 +53,15 @@
       <DependentUpon>DefenderConfigurationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="GoodBoi\GoodBoi.cs" />
+    <Compile Include="GoodBoi\GoodBoiConfiguration.cs" />
+    <Compile Include="GoodBoi\GoodBoiConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoodBoi\GoodBoiConfigurationForm.Designer.cs">
+      <DependentUpon>GoodBoiConfigurationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Zoolander\Zoolander.cs" />
     <Compile Include="Zoolander\ZoolanderConfiguration.cs" />
@@ -72,6 +81,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Defender\DefenderConfigurationForm.resx">
       <DependentUpon>DefenderConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoodBoi\GoodBoiConfigurationForm.resx">
+      <DependentUpon>GoodBoiConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Zoolander\ZoolanderConfigurationForm.resx">
       <DependentUpon>ZoolanderConfigurationForm.cs</DependentUpon>
