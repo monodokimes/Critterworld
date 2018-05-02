@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace CatCritter
+namespace _100458008
 {
     /// <summary>
     /// The Defender critter moves slowly and sits around waiting for fights. If

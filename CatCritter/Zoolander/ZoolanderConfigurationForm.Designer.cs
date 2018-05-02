@@ -1,4 +1,4 @@
-﻿namespace CatCritter
+﻿namespace _100458008
 {
     partial class ZoolanderConfigurationForm
     {

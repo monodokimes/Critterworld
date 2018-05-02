@@ -7,7 +7,7 @@
     <ProjectGuid>{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CatCritter</RootNamespace>
+    <RootNamespace>_100458008</RootNamespace>
     <AssemblyName>100458008</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
-namespace CatCritter
+namespace _100458008
 {
     /// <summary>
     /// The goodest of bois. Will wander randomly and then

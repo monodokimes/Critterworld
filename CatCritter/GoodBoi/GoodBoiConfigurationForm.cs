@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CatCritter
+namespace _100458008
 {
     public partial class GoodBoiConfigurationForm : Form
     {

@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CritterWorldControlPanel", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CritterBrains", "CritterBrains\CritterBrains.csproj", "{C9BC9344-AAD7-4EC2-850D-F82C557F7190}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatCritter", "CatCritter\CatCritter.csproj", "{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_100458008", "CatCritter\_100458008.csproj", "{505F5529-DAA4-4F4F-A9F7-B2F4B9653B70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
